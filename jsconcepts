@@ -1,0 +1,52 @@
+closure - 
+function enclosed with its lexical scope bundled to gether to form a closure.
+
+e.g.1
+
+let createCounter = ()=>{
+    let count = 0;//private variable
+
+    function inner(){
+        // outside count value can be accessed via inner fun
+        count++;
+        return count;
+    }
+
+}
+
+let counter = createCounter();
+
+console.log(counter());
+console.log(counter());
+// count can not be accessible
+
+console.log(createCounter()())
+// Each call to createCounter() creates a separate private memory.
+
+// Advanced use cases
+Data encapsulation- keep data protected and allow access via particular methods
+function currying - xnsforming fun with multiple argument into series of chaining
+
+// data encapsulation example
+function createCounter() {
+ let count = 0;
+
+ function increment() {
+ count++;
+ return count;
+ }
+
+ return increment;
+}
+
+const counter1 = createCounter();
+const counter2 = createCounter();
+
+console.log(counter1()); // Output: 1
+console.log(counter2()); // Output: 1
+
+console.log(counter1()); // Output: 2
+console.log(counter2()); // Output: 2
+
+// count variable is not accessible here because it's private to the closure
+// console.log(count); // ReferenceError
